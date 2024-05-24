@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-//import 'dart:io';
+import 'dart:io';
 import 'package:vehicle_care/Presentation/Screens/RegisterCarScreen.dart';
 import 'package:vehicle_care/Presentation/Widgets/appbar_general.dart';
 import 'package:vehicle_care/Presentation/Widgets/menuDrawer.dart';
@@ -26,8 +26,8 @@ class _MainScreenState extends State<MainScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    //final dynamic args = ModalRoute.of(context)!.settings.arguments;
-    //final File carro = args as File;
+    final dynamic args = ModalRoute.of(context)!.settings.arguments;
+    final File carro = args as File;
 
     return SafeArea(
       child: Scaffold(
