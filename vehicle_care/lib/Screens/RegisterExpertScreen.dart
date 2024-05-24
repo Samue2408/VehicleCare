@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:vehicle_care/Screens/FormKnowledge_Screen.dart';
-import 'package:vehicle_care/Screens/RegisterCarScreen.dart';
 import 'package:vehicle_care/Widgets/camposTexto.dart';
 
 class RegisterExperts extends StatefulWidget {

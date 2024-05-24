@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vehicle_care/Classes/Questions.dart';
-import 'package:vehicle_care/Screens/MainScreen.dart';
 import 'package:vehicle_care/Screens/RegisterCarScreen.dart';
 
 class QuestionsPage extends StatefulWidget {
