@@ -1,0 +1,569 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:proyecto_movil/Classes/Questions.dart';
+import 'package:proyecto_movil/Widgets/appbar_general.dart';
+
+
+class QuestionsPage extends StatefulWidget {
+  const QuestionsPage({super.key});
+
+  @override
+  State<QuestionsPage> createState() => _QuestionsPageState();
+}
+
+class _QuestionsPageState extends State<QuestionsPage> {
+  // lista de preguntas a responder 
+  final List<Question> _Preguntas = [
+    Question(
+      enunciado: "1. Can you describe the steps to change the oil in a car?",
+      opciones: [
+        'A. Take out the old oil, put in the new one.',
+        'B. Take out the old oil, change the oil filter, put in the new one.',
+        'C. Just put the new oil.',
+        'D. I don’t  know'
+      ]
+    ),
+    Question(
+      enunciado: "2. How would you check the brake fluid level in your vehicle?",
+      opciones: [
+        'A. Looking at the color of the liquid.',
+        'B. Measuring the amount of liquid in the tank.',
+        'C. Testing the taste of the liquid.',
+        'D. I don’t  know'
+      ]
+    ),
+    Question(
+      enunciado: "3. What would an illuminated engine warning light on the dashboard indicate?",
+      opciones: [
+        'A. That the engine is hot.',
+        'B. That there is a problem with the engine.',
+        'C. That the engine is running correctly.',
+        'D. I don’t  know'
+      ]
+    ),
+    Question(
+      enunciado: "4. How would you identify a refrigerant leak?",
+      opciones: [
+        'A. Because of the smell.',
+        'B. By the color of the liquid under the car.',
+        'C. Because of the noise made by the engine.',
+        'D. I don’t  know'
+      ]
+    ),
+    Question(
+      enunciado: "5.What are the signs of tire wear that would indicate they need to be replaced?",
+      opciones: [
+        'A. If they are dirty.',
+        'B. If they are less than 1.6mm deep in the slots.',
+        'C. If they have been used for more than one year.',
+        'D. I don’t  know'
+      ]
+    ),
+  ];
+
+  int selectedOptionIndex = -1; // Índice de la opción seleccionada, -1 indica que ninguna está seleccionada
+
+  @override
+  Widget build(BuildContext context) {
+    //variables
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    //
+    return SafeArea(
+      child: Scaffold(
+        //appBar: appbar_general(screenHeight),
+        body:  Container(
+          //medidas
+          width: double.infinity,
+          height: screenHeight,
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 150),
+          //decoration
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.black,
+                Color(0xff050309),
+              ],
+            ),
+          ),
+          child: ListView(
+            children: [
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                   children: 
+                   List.generate( //aqui vamos a leer nuestra lista de preguntas
+                    _Preguntas.length, //cant de preguntas
+                    (indexPreg){
+                      final VarPreguntas = _Preguntas[indexPreg]; //para extraer el enunciado y las preguntas que se va a mostrar
+
+                      return Column(
+                        children: [
+                          Text(VarPreguntas.enunciado, style: TextStyle(color: Colors.white),),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Wrap( //nos permite crear un layout para orientar los hijos de manera verticañ
+                            children: 
+                            List.generate(
+                              VarPreguntas.opciones.length, 
+                              (indexOpcion) {
+                                //variables
+                                final opc = VarPreguntas.opciones[indexOpcion];
+                                final EstaSeleccionada = VarPreguntas.respuestas.contains(opc);
+                                //
+                                return Row(
+                                  children: [
+                                    Checkbox(
+                                      value: EstaSeleccionada, 
+                                      onChanged: (value){ 
+                                        _OpcionSeleccionada(indexPreg, indexOpcion);
+                                      },
+                                    ),
+                                    Text(VarPreguntas.opciones[indexOpcion], style: TextStyle(color: Colors.white)),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                  ],  
+                                );
+                              }
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
+/*Metodos para agregar la respuesta a la bases de datos: va contener dos parametros, el index de la pregunta y el
+index de la opcion que se escoja.
+
+notas: como la primera vez la lista de pregunta va a estar vacia, el bool va estar en false y va entrar en el else.
+pero si ya escogí una respuesta y lo que hago es cambiar de opcion, el bool va hacer true y va entrar en el if. 
+*/  
+  void _OpcionSeleccionada(int indexPregunta, int indexOpcion){
+    final Question preguntas = _Preguntas[indexPregunta];
+    final String opcion = preguntas.opciones[indexOpcion];
+    final bool Seleccion = preguntas.respuestas.contains(opcion); //el constains es para verificar que la opcion que se esocja está dentro de mi lista
+
+    final respuest = List<String>.from(preguntas.respuestas); //esto se hace para replicar la lista de respuestas
+
+    //agg las respuestas a la lista para que se esté actualizando
+    if (Seleccion) {
+      respuest.remove(opcion);
+    }else{ //entra en el else si la respuesta no está seleccionada
+      respuest.add(opcion);
+
+
+      _Preguntas[indexPregunta] = preguntas.ActaualizarPregunta(respuest);
+      setState(() {});
+    }
+
+  }
+}
+
+
+
+//segunda parte del codigo - codigo base del video
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:proyecto_movil/Classes/Questions.dart';
+import 'package:proyecto_movil/Widgets/appbar_general.dart';
+
+
+class QuestionsPage extends StatefulWidget {
+  const QuestionsPage({super.key});
+
+  @override
+  State<QuestionsPage> createState() => _QuestionsPageState();
+}
+
+class _QuestionsPageState extends State<QuestionsPage> {
+  // lista de preguntas a responder 
+  final List<Question> _Preguntas = [
+    Question(
+      enunciado: "1. Can you describe the steps to change the oil in a car?",
+      opciones: [
+        'A. Take out the old oil, put in the new one.',
+        'B. Take out the old oil, change the oil filter, put in the new one.',
+        'C. Just put the new oil.',
+        'D. I don’t  know'
+      ]
+    ),
+    Question(
+      enunciado: "2. How would you check the brake fluid level in your vehicle?",
+      opciones: [
+        'A. Looking at the color of the liquid.',
+        'B. Measuring the amount of liquid in the tank.',
+        'C. Testing the taste of the liquid.',
+        'D. I don’t  know'
+      ]
+    ),
+    Question(
+      enunciado: "3. What would an illuminated engine warning light on the dashboard indicate?",
+      opciones: [
+        'A. That the engine is hot.',
+        'B. That there is a problem with the engine.',
+        'C. That the engine is running correctly.',
+        'D. I don’t  know'
+      ]
+    ),
+    Question(
+      enunciado: "4. How would you identify a refrigerant leak?",
+      opciones: [
+        'A. Because of the smell.',
+        'B. By the color of the liquid under the car.',
+        'C. Because of the noise made by the engine.',
+        'D. I don’t  know'
+      ]
+    ),
+    Question(
+      enunciado: "5.What are the signs of tire wear that would indicate they need to be replaced?",
+      opciones: [
+        'A. If they are dirty.',
+        'B. If they are less than 1.6mm deep in the slots.',
+        'C. If they have been used for more than one year.',
+        'D. I don’t  know'
+      ]
+    ),
+  ];
+
+  int selectedOptionIndex = -1; // Índice de la opción seleccionada, -1 indica que ninguna está seleccionada
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    List<Widget> generateRadioButtons(Question pregunta, int index) {
+      double screenWidth = MediaQuery.of(context).size.width;
+      return List.generate(
+        pregunta.opciones.length,
+        (optionIndex) {
+          return Row(
+            children: [
+              Radio<int>(
+                value: optionIndex, // Valor único para cada opción
+                groupValue: selectedOptionIndex, // Valor de la opción seleccionada del grupo
+                onChanged: (value) {
+                  setState(() {
+                    selectedOptionIndex = value!; // Actualiza la opción seleccionada
+                  });
+                },
+                activeColor: Colors.purple,
+              ),
+              Text(pregunta.opciones[optionIndex], style: TextStyle(color: Colors.white, fontSize: screenWidth*0.035 )),
+            ],
+          );
+        },
+      );
+    }
+    //variables
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    //
+    return SafeArea(
+      child: Scaffold(
+        //appBar: appbar_general(screenHeight),
+        body:  Container(
+          //medidas
+          width: double.infinity,
+          height: screenHeight,
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 90),
+          //decoration
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.black,
+                Color(0xff050309),
+              ],
+            ),
+          ),
+          child: ListView(
+            children: [
+               Container(
+                child: Text("Knowledge in vehicle’s maintenance", style: TextStyle(
+                  fontFamily: "Bruno Ace", color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
+                ),
+              ),
+              Container(
+                child: Text("This is a form to know your level of knowledge about vehicle maintenance", style: TextStyle(
+                  fontFamily: "Jura", color: Colors.white, fontWeight: FontWeight.w100, fontSize: screenWidth*0.04),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 60.0),
+                width: double.infinity,
+                child: Column(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: List.generate(
+                    _Preguntas.length,
+                    (index) {
+                      final pregunta = _Preguntas[index];
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(pregunta.enunciado, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                          SizedBox(height: 20),
+                          Wrap(
+                            children: generateRadioButtons(pregunta, index), // Utiliza la función para generar los Radio buttons
+                          ),
+                          SizedBox(height: 20),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
+/*Metodos para agregar la respuesta a la bases de datos: va contener dos parametros, el index de la pregunta y el
+index de la opcion que se escoja.
+
+notas: como la primera vez la lista de pregunta va a estar vacia, el bool va estar en false y va entrar en el else.
+pero si ya escogí una respuesta y lo que hago es cambiar de opcion, el bool va hacer true y va entrar en el if. 
+*/  
+  void _OpcionSeleccionada(int indexPregunta, int indexOpcion){
+    final Question preguntas = _Preguntas[indexPregunta];
+    final String opcion = preguntas.opciones[indexOpcion];
+    final bool Seleccion = preguntas.respuestas.contains(opcion); //el constains es para verificar que la opcion que se esocja está dentro de mi lista
+
+    final respuest = List<String>.from(preguntas.respuestas); //esto se hace para replicar la lista de respuestas
+
+    //agg las respuestas a la lista para que se esté actualizando
+    if (Seleccion) {
+      respuest.remove(opcion);
+    }else{ //entra en el else si la respuesta no está seleccionada
+      respuest.add(opcion);
+    }
+
+      _Preguntas[indexPregunta] = preguntas.ActaualizarPregunta(respuest);
+      setState(() {});
+
+
+  }
+}
+
+
+
+//tercer codigo - sirve
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:proyecto_movil/Classes/Questions.dart';
+import 'package:proyecto_movil/Widgets/appbar_general.dart';
+
+
+class QuestionsPage extends StatefulWidget {
+  const QuestionsPage({super.key});
+
+  @override
+  State<QuestionsPage> createState() => _QuestionsPageState();
+}
+
+class _QuestionsPageState extends State<QuestionsPage> {
+  // lista de preguntas a responder 
+  final List<Question> _Preguntas = [
+    Question(
+      enunciado: "1. Can you describe the steps to change the oil in a car?",
+      opciones: [
+        'A. Take out the old oil, put in the new one.',
+        'B. Take out the old oil, change the oil filter, put in the new one.',
+        'C. Just put the new oil.',
+        'D. I don’t  know'
+      ]
+    ),
+    Question(
+      enunciado: "2. How would you check the brake fluid level in your vehicle?",
+      opciones: [
+        'A. Looking at the color of the liquid.',
+        'B. Measuring the amount of liquid in the tank.',
+        'C. Testing the taste of the liquid.',
+        'D. I don’t  know'
+      ]
+    ),
+    Question(
+      enunciado: "3. What would an illuminated engine warning light on the dashboard indicate?",
+      opciones: [
+        'A. That the engine is hot.',
+        'B. That there is a problem with the engine.',
+        'C. That the engine is running correctly.',
+        'D. I don’t  know'
+      ]
+    ),
+    Question(
+      enunciado: "4. How would you identify a refrigerant leak?",
+      opciones: [
+        'A. Because of the smell.',
+        'B. By the color of the liquid under the car.',
+        'C. Because of the noise made by the engine.',
+        'D. I don’t  know'
+      ]
+    ),
+    Question(
+      enunciado: "5.What are the signs of tire wear that would indicate they need to be replaced?",
+      opciones: [
+        'A. If they are dirty.',
+        'B. If they are less than 1.6mm deep in the slots.',
+        'C. If they have been used for more than one year.',
+        'D. I don’t  know'
+      ]
+    ),
+  ];
+  Map<int, int> selectedOptionIndexes = {}; // Mapa para mantener el estado de las selecciones
+  int selectedOptionIndex = -1; // Índice de la opción seleccionada, -1 indica que ninguna está seleccionada
+
+  @override
+  void initState() {
+    super.initState();
+    // Inicializar el estado de las selecciones
+    _Preguntas.asMap().forEach((index, pregunta) {
+      selectedOptionIndexes[index] = -1; // -1 indica ninguna selección
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    List<Widget> generateRadioButtons(Question pregunta, int index) {
+      double screenWidth = MediaQuery.of(context).size.width;
+      return List.generate(
+        pregunta.opciones.length,
+        (optionIndex) {
+          return Row(
+            children: [
+              Radio<int>(
+                value: optionIndex, // Valor único para cada opción
+                groupValue: selectedOptionIndexes[index],
+                onChanged: (value) {
+                  setState(() {
+                    selectedOptionIndexes[index] = value!;// Actualiza la opción seleccionada
+                  });
+                },
+                activeColor: Colors.purple,
+              ),
+              Text(pregunta.opciones[optionIndex], style: TextStyle(color: Colors.white, fontSize: screenWidth*0.035 )),
+            ],
+          );
+        },
+      );
+    }
+    //variables
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    //
+    return SafeArea(
+      child: Scaffold(
+        //appBar: appbar_general(screenHeight),
+        body:  Container(
+          //medidas
+          width: double.infinity,
+          height: screenHeight,
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 90),
+          //decoration
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.black,
+                Color(0xff050309),
+              ],
+            ),
+          ),
+          child: ListView(
+            children: [
+               Container(
+                child: Text("Knowledge in vehicle’s maintenance", style: TextStyle(
+                  fontFamily: "Bruno Ace", color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
+                ),
+              ),
+              Container(
+                child: Text("This is a form to know your level of knowledge about vehicle maintenance", style: TextStyle(
+                  fontFamily: "Jura", color: Colors.white, fontWeight: FontWeight.w100, fontSize: screenWidth*0.04),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 60.0),
+                width: double.infinity,
+                child: Column(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: List.generate(
+                    _Preguntas.length,
+                    (index) {
+                      final pregunta = _Preguntas[index];
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(pregunta.enunciado, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                          SizedBox(height: 20),
+                          Wrap(
+                            children: generateRadioButtons(pregunta, index), // Utiliza la función para generar los Radio buttons
+                          ),
+                          SizedBox(height: 20),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
+/*Metodos para agregar la respuesta a la bases de datos: va contener dos parametros, el index de la pregunta y el
+index de la opcion que se escoja.
+
+notas: como la primera vez la lista de pregunta va a estar vacia, el bool va estar en false y va entrar en el else.
+pero si ya escogí una respuesta y lo que hago es cambiar de opcion, el bool va hacer true y va entrar en el if. 
+*/  
+  void _OpcionSeleccionada(int indexPregunta, int indexOpcion) {
+    setState(() {
+      selectedOptionIndexes[indexPregunta] = indexOpcion;
+    });
+  }
+
+  List<String> getSelectedResponses() {
+    List<String> respuestas = [];
+    selectedOptionIndexes.forEach((indexPregunta, indexOpcion) {
+      if (indexOpcion != -1) {
+        respuestas.add(_Preguntas[indexPregunta].opciones[indexOpcion]);
+      }
+    });
+    return respuestas;
+  }
+}
+
+
+
