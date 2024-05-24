@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vehicle_care/Widgets/appbar_general.dart';
-import 'package:vehicle_care/Widgets/menuDrawer.dart';
-import 'package:vehicle_care/Widgets/navBar.dart';
+import 'package:vehicle_care/Presentation/Widgets/appbar_general.dart';
+import 'package:vehicle_care/Presentation/Widgets/menuDrawer.dart';
+import 'package:vehicle_care/Presentation/Widgets/navBar.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});

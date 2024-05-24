@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vehicle_care/Screens/CarScreen.dart';
-import 'package:vehicle_care/Screens/ExpertScreen.dart';
-import 'package:vehicle_care/Screens/MainScreen.dart';
-import 'package:vehicle_care/Screens/SearchScreen.dart';
+import 'package:vehicle_care/Presentation/Screens/CarScreen.dart';
+import 'package:vehicle_care/Presentation/Screens/ExpertScreen.dart';
+import 'package:vehicle_care/Presentation/Screens/MainScreen.dart';
+import 'package:vehicle_care/Presentation/Screens/SearchScreen.dart';
 
 Container Navbar(double screenHeight, double screenWidth, BuildContext context,
     {bool? inicio = false,
