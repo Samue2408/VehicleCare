@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class Car {
   final int id;
   final String brand;
@@ -7,7 +5,7 @@ class Car {
   final DateTime year;
   final double mileage;
   final String type_of_file;
-  final File file_image ;
+  final String file_image ;
 
 
   Car(
@@ -19,18 +17,18 @@ class Car {
       required this.mileage,
       required this.type_of_file,
       required this.file_image,
-
     }
   );
-/*
-  factory User.fromJson(Map<String, dynamic> json){
-    var tarea_list = json['tasks'] as List;
-    List<Tasks> tareas = tarea_list.map((item) => Tasks.fronJson(item)).toList();
-    return User(
-      name: json['name'], 
-      email: json['email'], 
-      taskss: tareas,
-    );
-  }*/
+
+  factory Car.fromJson(Map<String, dynamic> json){
+    return Car(
+      id: json['id'], 
+      brand: json['brand'], 
+      model: json['model'], 
+      year: json['year'], 
+      mileage: json['mileage'], 
+      type_of_file: json['type_of_file'], 
+      file_image: json['file_image']);
+  }
 
 }

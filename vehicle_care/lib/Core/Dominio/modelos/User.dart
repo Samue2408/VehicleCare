@@ -1,7 +1,7 @@
 import 'package:vehicle_care/Core/Dominio/modelos/Car.dart';
 
 
-class Users {
+abstract class Users {
   final int id;
   final String name_o_email;
   final String cellphone;
