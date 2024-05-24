@@ -1,22 +1,22 @@
 import 'package:vehicle_care/Core/Dominio/modelos/Car.dart';
 
 
-class Car {
+class Users {
   final int id;
   final String name_o_email;
   final String cellphone;
   final String password;
   final String type_user; 
-  final List<Car> cards;
+  final List<Car> cars;
 
-  Car(
+  Users(
     {
       required this.id,
       required this.name_o_email,
       required this.cellphone,
       required this.password,
       required this.type_user,
-      required this.cards,
+      required this.cars,
     }
   );
 /*
