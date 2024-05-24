@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:vehicle_care/Screens/MainScreen.dart';
-import 'package:vehicle_care/Screens/RegisterScreen.dart';
+import 'package:vehicle_care/Presentation/Screens/MainScreen.dart';
+import 'package:vehicle_care/Presentation/Screens/RegisterScreen.dart';
 
 class Sign_In_ extends StatefulWidget {
   const Sign_In_({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vehicle_care/Screens/ExpertProfileScreen.dart';
-import 'package:vehicle_care/Widgets/menuDrawer.dart';
+import 'package:vehicle_care/Presentation/Screens/ExpertProfileScreen.dart';
+import 'package:vehicle_care/Presentation/Widgets/menuDrawer.dart';
 
 class PublishOpinionPage extends StatefulWidget {
   const PublishOpinionPage({super.key});

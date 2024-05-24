@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vehicle_care/Screens/RegisterScreen.dart';
+import 'package:vehicle_care/Presentation/Screens/RegisterScreen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});

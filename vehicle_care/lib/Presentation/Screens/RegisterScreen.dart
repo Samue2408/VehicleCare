@@ -2,10 +2,10 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:vehicle_care/Screens/FormKnowledge_Screen.dart';
-import 'package:vehicle_care/Screens/RegisterExpertScreen.dart';
-import 'package:vehicle_care/Screens/Sign_in_Screen.dart';
-import 'package:vehicle_care/Widgets/camposTexto.dart';
+import 'package:vehicle_care/Presentation/Screens/FormKnowledge_Screen.dart';
+import 'package:vehicle_care/Presentation/Screens/RegisterExpertScreen.dart';
+import 'package:vehicle_care/Presentation/Screens/Sign_in_Screen.dart';
+import 'package:vehicle_care/Presentation/Widgets/camposTexto.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

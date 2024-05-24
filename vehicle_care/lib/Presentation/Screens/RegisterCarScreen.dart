@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:vehicle_care/Screens/MainScreen.dart';
-import 'package:vehicle_care/Widgets/camposTexto.dart';
+import 'package:vehicle_care/Presentation/Screens/MainScreen.dart';
+import 'package:vehicle_care/Presentation/Widgets/camposTexto.dart';
 
 class RegisterCarScreen extends StatefulWidget {
   const RegisterCarScreen({super.key});

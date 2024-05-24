@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vehicle_care/Classes/Questions.dart';
-import 'package:vehicle_care/Screens/RegisterCarScreen.dart';
+import 'package:vehicle_care/Core/Dominio/modelos/Questions.dart';
+import 'package:vehicle_care/Presentation/Screens/RegisterCarScreen.dart';
 
 class QuestionsPage extends StatefulWidget {
   const QuestionsPage({super.key});

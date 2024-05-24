@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:vehicle_care/Screens/ExpertScreen.dart';
-import 'package:vehicle_care/Screens/PublishOpinionScreen.dart';
-import 'package:vehicle_care/Widgets/menuDrawer.dart';
+import 'package:vehicle_care/Presentation/Screens/ExpertScreen.dart';
+import 'package:vehicle_care/Presentation/Screens/PublishOpinionScreen.dart';
+import 'package:vehicle_care/Presentation/Widgets/menuDrawer.dart';
 
 class ExpertProfile extends StatefulWidget {
   const ExpertProfile({super.key});

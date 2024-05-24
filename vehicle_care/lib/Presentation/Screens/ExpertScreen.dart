@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:vehicle_care/Widgets/appbar_general.dart';
-import 'package:vehicle_care/Widgets/menuDrawer.dart';
-import 'package:vehicle_care/Widgets/navBar.dart';
-import 'package:vehicle_care/Screens/ExpertProfileScreen.dart';
+import 'package:vehicle_care/Presentation/Widgets/appbar_general.dart';
+import 'package:vehicle_care/Presentation/Widgets/menuDrawer.dart';
+import 'package:vehicle_care/Presentation/Widgets/navBar.dart';
+import 'package:vehicle_care/Presentation/Screens/ExpertProfileScreen.dart';
 
 class ExpertScreen extends StatefulWidget {
   const ExpertScreen({super.key});
