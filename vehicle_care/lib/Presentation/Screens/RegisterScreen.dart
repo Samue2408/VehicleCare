@@ -88,6 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       Checkbox(
                         value: isChecked,
+                        side: BorderSide(color: Colors.white),
                         onChanged: (value) {
                           setState(() {
                             isChecked = value!;

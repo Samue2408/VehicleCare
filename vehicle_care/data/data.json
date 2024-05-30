@@ -1,5 +1,107 @@
 {
-    "ServicesCenters":[
-        
+    "normal_user": [
+      {
+        "id": 1,
+        "name_o_email": "user1@example.com",
+        "cellphone": "1234567890",
+        "password": "password123",
+        "cars": [
+          {
+            "id": 101,
+            "brand": "Toyota",
+            "model": "Corolla",
+            "year": "2015-01-01",
+            "mileage": 50000,
+            "file_image": "car_image.png"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name_o_email": "user2@example.com",
+        "cellphone": "45785554",
+        "password": "normal_pass123",
+        "cars": [
+          {
+            "id": 102,
+            "brand": "Honda",
+            "model": "Civic",
+            "year": "2018-01-01",
+            "mileage": 30000,
+            "file_image": "car_image2.png"
+          }
+        ]
+      }
+    ],
+    "Expert_User": [
+        {
+          "id": 1,
+          "name_o_email": "expert1@example.com",
+          "cellphone": "302455684",
+          "password": "password789",
+          "cars": [
+            {
+              "id": 101,
+              "brand": "Toyota",
+              "model": "Corolla",
+              "year": "2015-01-01",
+              "mileage": 50000,
+              "file_image": "car_image.png"
+            }
+          ],
+          "work_Addres": "calle 7 # 8-9",
+          "speciliaty": "Mechanic",
+          "year_of_experience": "2008-01-01",
+          "reviews": [
+            {
+              "id": 301,
+              "description": "Great service",
+              "score": 5,
+              "date": "2023-01-01"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name_o_email": "exper2t@example.com",
+          "cellphone": "3152569874",
+          "password": "expertpass1",
+          "type_user": "expert",
+          "cars": [
+            {
+              "id": 102,
+              "brand": "Honda",
+              "model": "Civic",
+              "year": "2018-01-01",
+              "mileage": 30000,
+              "file_image": "car_image2.png"
+            }
+          ],
+          "work_Addres": "carrera 7 # 44 - 98",
+          "speciliaty": "Mechanic",
+          "year_of_experience": "2014-01-01",
+          "reviews": [
+            {
+              "id": 701,
+              "description": "Great service",
+              "score": 5,
+              "date": "2023-01-01"
+            }
+          ]
+        }
+      ],
+    "serviceCenters": [
+      {
+        "id": 1,
+        "name": "Service Center 1",
+        "adress": "4567 Service Ave",
+        "image": "service_center1.png"
+      },
+      {
+        "id": 2,
+        "name": "Service Center 2",
+        "adress": "Service Avenida bolivar 78",
+        "image": "servic    e_center1.png"
+      }
     ]
-}
+  }

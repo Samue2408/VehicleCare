@@ -91,6 +91,12 @@ class _QuestionsPageState extends State<QuestionsPage> {
                         selectedOptionIndexes[index] = value!;
                       });
                     },
+                    fillColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+                    if (states.contains(MaterialState.selected)) {
+                      return Colors.purple;
+                    }
+                    return Colors.grey; // Color del borde cuando no está seleccionado
+                  }),
                     activeColor: Colors.purple,
                   ),
                   Expanded(
