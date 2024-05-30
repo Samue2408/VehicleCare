@@ -10,7 +10,4 @@ class Service {
     required this.name,
     required this.intervale
   });
-
-
-  //methods
 }
