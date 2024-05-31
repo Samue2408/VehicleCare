@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vehicle_care/Core/Dominio/PreferenciaUsuario/UserPreferences.dart';
 import 'package:vehicle_care/Core/Dominio/modelos/User.dart';
+import 'package:vehicle_care/Core/Dominio/modelos/Experts.dart';
 import 'package:vehicle_care/Presentation/Screens/RegisterScreen.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -26,8 +27,11 @@ class _MyHomePageState extends State<MyHomePage> {
   double myWidth = 0.0;
 
   late Users _user;
+  late U_expert _experts;
   late bool check = false;
   late Map<String, dynamic> user;
+  late Map<String, dynamic> experts;
+
 
   @override
   void initState() {
@@ -42,8 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
       setState(() {
         _user = Users.fromJson(userData['users'][0]);
+        _experts = U_expert.fromJson(userData['u_expert'][0]);
         prefs.user = jsonEncode(_user.toJson());
+        prefs.expert = jsonEncode(_experts.toJson());
         user = jsonDecode(prefs.user);
+        experts = jsonDecode(prefs.expert);
         check = true;
       });
     } catch (e) {
@@ -71,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     Container(
                         padding: EdgeInsets.only(left: screenWidth * 0.07),
-                        child: const Column(
+                        child: Column(
                           children: [
                             Text(
                               'TAKE CARE OF YOUR CAR. SECURE YOUR TRIP',

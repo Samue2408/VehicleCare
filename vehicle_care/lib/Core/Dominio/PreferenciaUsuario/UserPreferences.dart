@@ -22,6 +22,9 @@ class PreferenciaUsuario {
   String get user => _prefs.getString('user') ?? '';
   set user(String value) => _prefs.setString('user', value);
 
+  String get expert => _prefs.getString('experts') ?? '';
+  set expert(String value) => _prefs.setString('experts', value);
+
   String get ultimapagina => _prefs.getString('ultimapagina') ?? 'Home';
   set ultimapagina(String value) => _prefs.setString('ultimapagina', value);
 }

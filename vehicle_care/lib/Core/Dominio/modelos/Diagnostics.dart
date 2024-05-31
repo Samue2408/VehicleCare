@@ -29,4 +29,6 @@ class Diagnostics{
         possible_causes: json['possible_causes'],
         solutions: solutions);
   }
+
+  
 }

@@ -35,4 +35,21 @@ class U_expert{
         speciliaty: json['speciliaty'],
         reviews: reviews);
   }
+
+  Map<String, dynamic> toJson(){
+    List<Map<String, dynamic>> expert_list = reviews.map((review) => review.toJson()).toList();
+
+    return {
+      'id': id,
+      'name': name,
+      'cellphone': cellphone,
+      'work_Addres': work_Addres,
+      'year_of_experience': year_of_experience,
+      'speciliaty': speciliaty,
+      'reviews': expert_list
+    };
+  }
+
+
+
 }

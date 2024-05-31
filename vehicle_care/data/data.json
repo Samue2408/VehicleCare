@@ -1,208 +1,205 @@
-
 {
   "users": [
-    {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "cellphone": 123456789,
-      "password": "password123",
-      "cars": [
-        {
+      {
           "id": 1,
-          "brand": "Toyota",
-          "model": "Corolla",
-          "year": 2020,
-          "mileage": 15000,
-          "file_image": "path/to/image.jpg",
-          "id_user": 1,
-          "maintenance": [
-            {
-              "id": 1,
-              "service": 
-                {
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "cellphone": 123456789,
+          "password": "password123",
+          "cars": [
+              {
                   "id": 1,
-                  "name": "Oil Change",
-                  "intervale": 5000
-                }
-              ,
-              "description": "Changed oil and filter",
-              "mileage": 5000
-            }
+                  "brand": "Toyota",
+                  "model": "Corolla",
+                  "year": 2020,
+                  "mileage": 15000,
+                  "file_image": "path/to/image.jpg",
+                  "id_user": 1,
+                  "maintenance": [
+                      {
+                          "id": 1,
+                          "service": {
+                              "id": 1,
+                              "name": "Oil Change",
+                              "intervale": 5000
+                          },
+                          "description": "Changed oil and filter",
+                          "mileage": 5000
+                      }
+                  ]
+              }
           ]
-        }
-      ]
-    }
+      }
   ],
   "u_expert": [
-    {
-      "id": 1,
-      "name": "Jane Smith",
-      "cellphone": 987654321,
-      "work_Addres": "123 Main St",
-      "speciliaty": "Engine Specialist",
-      "year_of_experience": 5,
-      "reviews": [
-        {
+      {
           "id": 1,
-          "description": "Great service!",
-          "score": 5,
-          "date": "2024-05-30T00:00:00.000Z",
-          "id_user": 1
-        }
-      ]
-    }
+          "name": "Jane Smith",
+          "cellphone": 987654321,
+          "work_Addres": "123 Main St",
+          "speciliaty": "Engine Specialist",
+          "year_of_experience": 5,
+          "reviews": [
+              {
+                  "id": 1,
+                  "description": "Great service!",
+                  "score": 5,
+                  "date": "2024-05-30T00:00:00.000Z",
+                  "id_user": 1
+              }
+          ]
+      }
   ],
   "diagnostics": [
-    {
-      "id": 1,
-      "symptoms": "motor no arranca",
-      "possible_causes": "batería descargada o problemas en el sistema de encendido",
-      "solutions": [
-        {
+      {
           "id": 1,
-          "description": "Verificar y recargar la batería."
-        },
-        {
+          "symptoms": "motor no arranca",
+          "possible_causes": "batería descargada o problemas en el sistema de encendido",
+          "solutions": [
+              {
+                  "id": 1,
+                  "description": "Verificar y recargar la batería."
+              },
+              {
+                  "id": 2,
+                  "description": "Revisar el sistema de encendido y reemplazar componentes defectuosos."
+              }
+          ]
+      },
+      {
           "id": 2,
-          "description": "Revisar el sistema de encendido y reemplazar componentes defectuosos."
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "symptoms": "ruido en los frenos",
-      "possible_causes": "desgaste de las pastillas de freno o discos de freno dañados",
-      "solutions": [
-        {
+          "symptoms": "ruido en los frenos",
+          "possible_causes": "desgaste de las pastillas de freno o discos de freno dañados",
+          "solutions": [
+              {
+                  "id": 3,
+                  "description": "Reemplazar las pastillas de freno."
+              },
+              {
+                  "id": 4,
+                  "description": "Revisar y rectificar o reemplazar los discos de freno."
+              }
+          ]
+      },
+      {
           "id": 3,
-          "description": "Reemplazar las pastillas de freno."
-        },
-        {
+          "symptoms": "sobrecalentamiento del motor",
+          "possible_causes": "falta de refrigerante o problemas en el termostato",
+          "solutions": [
+              {
+                  "id": 5,
+                  "description": "Verificar y rellenar el nivel de refrigerante."
+              },
+              {
+                  "id": 6,
+                  "description": "Revisar el termostato y reemplazarlo si es necesario."
+              }
+          ]
+      },
+      {
           "id": 4,
-          "description": "Revisar y rectificar o reemplazar los discos de freno."
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "symptoms": "sobrecalentamiento del motor",
-      "possible_causes": "falta de refrigerante o problemas en el termostato",
-      "solutions": [
-        {
+          "symptoms": "luces delanteras no funcionan",
+          "possible_causes": "bombillas quemadas o problemas en el circuito eléctrico",
+          "solutions": [
+              {
+                  "id": 7,
+                  "description": "Reemplazar las bombillas delanteras."
+              },
+              {
+                  "id": 8,
+                  "description": "Verificar el circuito eléctrico y reparar cables o fusibles dañados."
+              }
+          ]
+      },
+      {
           "id": 5,
-          "description": "Verificar y rellenar el nivel de refrigerante."
-        },
-        {
+          "symptoms": "vibración al frenar",
+          "possible_causes": "discos de freno deformados o pastillas de freno desgastadas",
+          "solutions": [
+              {
+                  "id": 9,
+                  "description": "Revisar y rectificar o reemplazar los discos de freno."
+              },
+              {
+                  "id": 10,
+                  "description": "Reemplazar las pastillas de freno."
+              }
+          ]
+      },
+      {
           "id": 6,
-          "description": "Revisar el termostato y reemplazarlo si es necesario."
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "symptoms": "luces delanteras no funcionan",
-      "possible_causes": "bombillas quemadas o problemas en el circuito eléctrico",
-      "solutions": [
-        {
+          "symptoms": "escape de aceite",
+          "possible_causes": "juntas o sellos dañados",
+          "solutions": [
+              {
+                  "id": 11,
+                  "description": "Revisar y reemplazar las juntas o sellos dañados."
+              },
+              {
+                  "id": 12,
+                  "description": "Verificar y apretar los tornillos de las tapas del motor."
+              }
+          ]
+      },
+      {
           "id": 7,
-          "description": "Reemplazar las bombillas delanteras."
-        },
-        {
+          "symptoms": "pérdida de potencia",
+          "possible_causes": "filtros de aire o combustible obstruidos",
+          "solutions": [
+              {
+                  "id": 13,
+                  "description": "Reemplazar el filtro de aire."
+              },
+              {
+                  "id": 14,
+                  "description": "Reemplazar el filtro de combustible."
+              }
+          ]
+      },
+      {
           "id": 8,
-          "description": "Verificar el circuito eléctrico y reparar cables o fusibles dañados."
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "symptoms": "vibración al frenar",
-      "possible_causes": "discos de freno deformados o pastillas de freno desgastadas",
-      "solutions": [
-        {
+          "symptoms": "dirección dura",
+          "possible_causes": "bajo nivel de líquido de dirección asistida o problemas en la bomba de dirección",
+          "solutions": [
+              {
+                  "id": 15,
+                  "description": "Revisar y rellenar el líquido de dirección asistida."
+              },
+              {
+                  "id": 16,
+                  "description": "Revisar y reemplazar la bomba de dirección si es necesario."
+              }
+          ]
+      },
+      {
           "id": 9,
-          "description": "Revisar y rectificar o reemplazar los discos de freno."
-        },
-        {
+          "symptoms": "ruido en el motor",
+          "possible_causes": "bajo nivel de aceite o componentes internos desgastados",
+          "solutions": [
+              {
+                  "id": 17,
+                  "description": "Verificar y rellenar el nivel de aceite."
+              },
+              {
+                  "id": 18,
+                  "description": "Revisar y reemplazar los componentes internos desgastados del motor."
+              }
+          ]
+      },
+      {
           "id": 10,
-          "description": "Reemplazar las pastillas de freno."
-        }
-      ]
-    },
-    {
-      "id": 6,
-      "symptoms": "escape de aceite",
-      "possible_causes": "juntas o sellos dañados",
-      "solutions": [
-        {
-          "id": 11,
-          "description": "Revisar y reemplazar las juntas o sellos dañados."
-        },
-        {
-          "id": 12,
-          "description": "Verificar y apretar los tornillos de las tapas del motor."
-        }
-      ]
-    },
-    {
-      "id": 7,
-      "symptoms": "pérdida de potencia",
-      "possible_causes": "filtros de aire o combustible obstruidos",
-      "solutions": [
-        {
-          "id": 13,
-          "description": "Reemplazar el filtro de aire."
-        },
-        {
-          "id": 14,
-          "description": "Reemplazar el filtro de combustible."
-        }
-      ]
-    },
-    {
-      "id": 8,
-      "symptoms": "dirección dura",
-      "possible_causes": "bajo nivel de líquido de dirección asistida o problemas en la bomba de dirección",
-      "solutions": [
-        {
-          "id": 15,
-          "description": "Revisar y rellenar el líquido de dirección asistida."
-        },
-        {
-          "id": 16,
-          "description": "Revisar y reemplazar la bomba de dirección si es necesario."
-        }
-      ]
-    },
-    {
-      "id": 9,
-      "symptoms": "ruido en el motor",
-      "possible_causes": "bajo nivel de aceite o componentes internos desgastados",
-      "solutions": [
-        {
-          "id": 17,
-          "description": "Verificar y rellenar el nivel de aceite."
-        },
-        {
-          "id": 18,
-          "description": "Revisar y reemplazar los componentes internos desgastados del motor."
-        }
-      ]
-    },
-    {
-      "id": 10,
-      "symptoms": "aire acondicionado no enfría",
-      "possible_causes": "falta de refrigerante o problemas en el compresor",
-      "solutions": [
-        {
-          "id": 19,
-          "description": "Verificar y recargar el refrigerante."
-        },
-        {
-          "id": 20,
-          "description": "Revisar y reparar o reemplazar el compresor."
-        }
-      ]
-    }
+          "symptoms": "aire acondicionado no enfría",
+          "possible_causes": "falta de refrigerante o problemas en el compresor",
+          "solutions": [
+              {
+                  "id": 19,
+                  "description": "Verificar y recargar el refrigerante."
+              },
+              {
+                  "id": 20,
+                  "description": "Revisar y reparar o reemplazar el compresor."
+              }
+          ]
+      }
   ]
 }
