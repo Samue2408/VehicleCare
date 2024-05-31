@@ -20,8 +20,8 @@ class Diagnostics{
 
   factory Diagnostics.fromJson(Map<String, dynamic> json) {
 
-    var solutoins_List = json['solutions'] as List;
-    List<Solutions> solutions = solutoins_List.map((item) => Solutions.fromJson(item)).toList(); 
+    var solutions_List = json['solutions'] as List;
+    List<Solutions> solutions = solutions_List.map((item) => Solutions.fromJson(item)).toList(); 
 
     return Diagnostics(
         id: json['id'],

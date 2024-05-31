@@ -19,4 +19,14 @@ class Service {
       intervale: json['intervale'],
       );
   }
+
+  Map<String, dynamic> toJson() {
+
+    return {
+      'id': id,
+      'name': name,
+      'intervale': intervale
+    };
+  }
+
 }

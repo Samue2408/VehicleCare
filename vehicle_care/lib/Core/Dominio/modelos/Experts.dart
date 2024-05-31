@@ -1,15 +1,14 @@
 // ignore_for_file: camel_case_types, non_constant_identifier_names, use_super_parameters
 
-import 'package:vehicle_care/Core/Dominio/modelos/Car.dart';
 import 'package:vehicle_care/Core/Dominio/modelos/reviews.dart';
 
 class U_expert{
   final int id;
   final String name;
-  final String cellphone;
+  final int cellphone;
   String? work_Addres;
   String? speciliaty;
-  DateTime? year_of_experience;
+  int? year_of_experience;
   final List<Reviews> reviews;
 
   U_expert({

@@ -1,29 +1,41 @@
-import 'package:vehicle_care/Core/Dominio/modelos/Car.dart';
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:vehicle_care/Core/Dominio/modelos/Service.dart';
 
-class Maintenances{
+class Maintenances {
   final int id;
-  final Cars id_car;
-  final Service id_service;
+  final Service service;
   final String description;
   final int mileage;
 
   //constructor
   Maintenances({
     required this.id,
-    required this.id_car,
-    required this.id_service,
+    required this.service,
     required this.description,
     required this.mileage,
   });
-
-  factory Maintenances.fromJson(Map<String, dynamic> json){
+//PENDIENTE REVISAR ENTRE MANTENIMIENTO Y SERVICIO --- NO LLEGA A SERVICIO
+  factory Maintenances.fromJson(Map<String, dynamic> json) {
+    var var_new_service = json['service'] as Map<String, dynamic>;
+    Service new_service = Service.fromJson(var_new_service);
+    
     return Maintenances(
-      id: json['id'],
-      description: json['description'],
-      id_car: json['id_cars'],
-      id_service: json['id_service'],
-      mileage: json['mileage']
-    );
+        id: json['id'],
+        description: json['description'],
+        service: new_service,
+        mileage: json['mileage']);
+  }
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> servi = service.toJson();
+
+    return {
+      'id': id,
+      'description': description,
+      'mileage': mileage,
+      'service': service,
+      'maintenance': servi
+    };
   }
 }
