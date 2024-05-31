@@ -1,5 +1,8 @@
 // ignore_for_file: unused_field, file_names
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vehicle_care/Core/Dominio/modelos/User.dart';
 
 class PreferenciaUsuario {
   late SharedPreferences _prefs;
@@ -27,4 +30,25 @@ class PreferenciaUsuario {
 
   String get ultimapagina => _prefs.getString('ultimapagina') ?? 'Home';
   set ultimapagina(String value) => _prefs.setString('ultimapagina', value);
+
+  dynamic listUser() {
+    String? usersJsonString = user;
+    List<dynamic> usersJson = jsonDecode(usersJsonString);
+    //List<Users> usersList =
+    //  usersJson.map((userJson) => Users.fromJson(userJson)).toList();
+    return usersJson;
+  }
+
+  dynamic addUser(Users usua) {
+    List<dynamic> usersJson = listUser();
+    List<Users> usersList =
+        usersJson.map((userJson) => Users.fromJson(userJson)).toList();
+    usersList.add(usua);
+
+    String updatedUsersJsonString =
+        jsonEncode(usersList.map((user) => user.toJson()).toList());
+    user = updatedUsersJsonString;
+
+    return listUser();
+  }
 }

@@ -26,12 +26,10 @@ class _MyHomePageState extends State<MyHomePage> {
   double translateY = 0.0;
   double myWidth = 0.0;
 
-  late Users _user;
+  late List<Users> _user;
   late U_expert _experts;
   late bool check = false;
-  late Map<String, dynamic> user;
   late Map<String, dynamic> experts;
-
 
   @override
   void initState() {
@@ -45,12 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
       Map<String, dynamic> userData = json.decode(jsonString);
 
       setState(() {
-        _user = Users.fromJson(userData['users'][0]);
+        List<dynamic> usersJson = userData['users'];
+        _user = usersJson.map((userJson) => Users.fromJson(userJson)).toList();
         _experts = U_expert.fromJson(userData['u_expert'][0]);
-        prefs.user = jsonEncode(_user.toJson());
+        prefs.user = jsonEncode(_user.map((user) => user.toJson()).toList());
         prefs.expert = jsonEncode(_experts.toJson());
-        user = jsonDecode(prefs.user);
-        experts = jsonDecode(prefs.expert);
         check = true;
       });
     } catch (e) {
@@ -79,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Container(
                         padding: EdgeInsets.only(left: screenWidth * 0.07),
                         child: Column(
-                          children: [
+                          children: const [
                             Text(
                               'TAKE CARE OF YOUR CAR. SECURE YOUR TRIP',
                               style: TextStyle(

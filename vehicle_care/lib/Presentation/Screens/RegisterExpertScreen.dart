@@ -13,6 +13,9 @@ class RegisterExperts extends StatefulWidget {
 }
 
 class _RegisterExpertsState extends State<RegisterExperts> {
+  final TextEditingController workController = TextEditingController();
+  final TextEditingController specialityController = TextEditingController();
+  final TextEditingController yearController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -54,11 +57,11 @@ class _RegisterExpertsState extends State<RegisterExperts> {
               Column(
                 children: [
                   camposTexto(
-                      'Work address', Icons.work_outline, TextInputType.name),
+                      'Work address', Icons.work_outline, TextInputType.name, workController),
                   camposTexto(
-                      'Speciality', Icons.email, TextInputType.emailAddress),
+                      'Speciality', Icons.email, TextInputType.emailAddress, specialityController),
                   camposTexto('Years of experience', Icons.edit_calendar,
-                      TextInputType.phone),
+                      TextInputType.phone, yearController),
                 ],
               ),
               Column(

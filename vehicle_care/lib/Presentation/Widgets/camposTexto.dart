@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Container camposTexto(String hint, IconData icono, TextInputType tipo) {
+Container camposTexto(String hint, IconData icono, TextInputType tipo, TextEditingController controller) {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
     padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -10,6 +10,7 @@ Container camposTexto(String hint, IconData icono, TextInputType tipo) {
         border: Border.all(color: const Color(0xFF1B0950), width: 2.0),
         color: const Color(0xff050309)),
     child: TextField(
+      controller: controller,
       obscureText: tipo == TextInputType.visiblePassword ? true : false,
       decoration: InputDecoration(
           prefixIcon: Icon(
@@ -30,3 +31,6 @@ Container camposTexto(String hint, IconData icono, TextInputType tipo) {
     ),
   );
 }
+
+
+

@@ -1,9 +1,12 @@
 // ignore_for_file: unused_local_variable, sized_box_for_whitespace, file_names
 
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:vehicle_care/Core/Dominio/PreferenciaUsuario/UserPreferences.dart';
+import 'package:vehicle_care/Core/Dominio/modelos/User.dart';
 import 'package:vehicle_care/Presentation/Screens/FormKnowledge_Screen.dart';
-import 'package:vehicle_care/Presentation/Screens/RegisterExpertScreen.dart';
 import 'package:vehicle_care/Presentation/Screens/Sign_in_Screen.dart';
 import 'package:vehicle_care/Presentation/Widgets/camposTexto.dart';
 
@@ -17,14 +20,21 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final prefs = PreferenciaUsuario();
+
   bool? isChecked = false;
-  final List<String> _items = ['User', 'Expert'];
-  String? _selectedItem;
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController userController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool isEmpty = false;
+  bool email_exist = false;
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
+    List<dynamic> users = prefs.listUser();
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -40,7 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           child: Center(
               child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Sign Up',
                   style: TextStyle(
@@ -48,15 +58,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     fontSize: screenHeight * 0.04,
                     color: Colors.white,
                   )),
+              const SizedBox(
+                height: 50,
+              ),
               Column(
                 children: [
-                  camposTexto('Name', Icons.person, TextInputType.name),
+                  Container(
+                    height: isEmpty ? null : 0,
+                    child: const Text(
+                      'Enter all data',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
                   camposTexto(
-                      'User or Email', Icons.email, TextInputType.emailAddress),
-                  camposTexto(
-                      'Cellphone', Icons.phone_iphone, TextInputType.phone),
-                  camposTexto(
-                      'Password', Icons.lock, TextInputType.visiblePassword),
+                      'Name', Icons.person, TextInputType.name, nameController),
+                  camposTexto('User', Icons.email, TextInputType.emailAddress,
+                      userController),
+                  camposTexto('Cellphone', Icons.phone_iphone,
+                      TextInputType.phone, phoneController),
+                  camposTexto('Password', Icons.lock,
+                      TextInputType.visiblePassword, passwordController),
+                  /*
+                  //Dropdown
                   Stack(
                     alignment: Alignment.center,
                     children: [
@@ -82,7 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           right: 52,
                           child: menuDesplegable('Type User'))
                     ],
-                  ),
+                  ),*/
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -112,9 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w900),
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    print("hola");
-                                  })
+                                  ..onTap = () {})
                           ])),
                     ],
                   ),
@@ -124,11 +145,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context,
-                          _selectedItem == 'User'
-                              ? QuestionsPage.routeName
-                              : RegisterExperts.routeName);
+                      if (nameController.text.isNotEmpty &&
+                          userController.text.isNotEmpty &&
+                          phoneController.text.isNotEmpty &&
+                          passwordController.text.isNotEmpty &&
+                          isChecked!) {
+                        for (var i = 0; i < users.length; i++) {
+                          if (userController.text == users[i]['email']) {
+                            // HACER QUE GUARDE USUARIO Y EN EL SHARED PREFERENCES
+                            email_exist = true;
+                            break;
+                          }
+                        }
+                        if (!email_exist) {
+                          int id = users.reversed.first['id'] + 1;
+                          Users new_user = Users(
+                              id: id,
+                              cellphone: int.parse(phoneController.text),
+                              email: userController.text,
+                              name: nameController.text,
+                              password: passwordController.text,
+                              cars: []);
+                          //users = prefs.addUser(new_user);
+                          Navigator.pushReplacementNamed(
+                              context, QuestionsPage.routeName, arguments: new_user);
+                        } else {
+                          print('usuario existente');
+                          setState(() {
+                            email_exist = false;
+                          });
+                        }
+                      } else {
+                        setState(() {
+                          isEmpty = true;
+                        });
+                      }
                     },
                     style: TextButton.styleFrom(
                         backgroundColor: const Color(0xFF1B0950),
@@ -175,7 +226,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Container menuDesplegable(String hint) {
+  /*Container menuDesplegable(String hint) {
     return Container(
         width: 690,
         child: DropdownButtonHideUnderline(
@@ -210,5 +261,5 @@ class _RegisterScreenState extends State<RegisterScreen> {
             },
           ),
         ));
-  }
+  }*/
 }

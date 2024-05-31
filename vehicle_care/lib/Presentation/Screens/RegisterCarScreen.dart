@@ -16,6 +16,10 @@ class RegisterCarScreen extends StatefulWidget {
 }
 
 class _RegisterCarScreenState extends State<RegisterCarScreen> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController userController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   File? imagePath;
   @override
   Widget build(BuildContext context) {
@@ -63,12 +67,12 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
               Column(
                 children: [
                   camposTexto(
-                      'Brand', Icons.directions_car, TextInputType.name),
+                      'Brand', Icons.directions_car, TextInputType.name, nameController),
                   camposTexto(
-                      'Model', Icons.type_specimen, TextInputType.emailAddress),
+                      'Model', Icons.type_specimen, TextInputType.emailAddress, userController),
                   camposTexto('Year', Icons.calendar_month_rounded,
-                      TextInputType.phone),
-                  camposTexto('Mileage', Icons.speed, TextInputType.number),
+                      TextInputType.phone, phoneController),
+                  camposTexto('Mileage', Icons.speed, TextInputType.number, passwordController),
                   SizedBox(
                     height: screenHeight * 0.02,
                   ),
