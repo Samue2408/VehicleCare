@@ -4,11 +4,13 @@ import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:vehicle_care/Presentation/Widgets/_showMyDialog.dart';
 import 'package:vehicle_care/Core/Dominio/PreferenciaUsuario/UserPreferences.dart';
 import 'package:vehicle_care/Core/Dominio/modelos/User.dart';
 import 'package:vehicle_care/Presentation/Screens/FormKnowledge_Screen.dart';
 import 'package:vehicle_care/Presentation/Screens/Sign_in_Screen.dart';
 import 'package:vehicle_care/Presentation/Widgets/camposTexto.dart';
+import 'package:vehicle_care/theme/theme.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -67,7 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: isEmpty ? null : 0,
                     child: const Text(
                       'Enter all data',
-                      style: TextStyle(color: Colors.red),
+                      style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                   ),
                   camposTexto(
@@ -158,6 +160,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }
                         }
                         if (!email_exist) {
+                          //nuevo usuario
                           int id = users.reversed.first['id'] + 1;
                           Users new_user = Users(
                               id: id,
@@ -166,14 +169,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               name: nameController.text,
                               password: passwordController.text,
                               cars: []);
-                          //users = prefs.addUser(new_user);
+                          users = prefs.addUser(new_user);
                           Navigator.pushReplacementNamed(
                               context, QuestionsPage.routeName, arguments: new_user);
                         } else {
-                          print('usuario existente');
+                          //usuario existente
+                          showMyDialog(context);
                           setState(() {
                             email_exist = false;
                           });
+                          
                         }
                       } else {
                         setState(() {
@@ -226,6 +231,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  
   /*Container menuDesplegable(String hint) {
     return Container(
         width: 690,

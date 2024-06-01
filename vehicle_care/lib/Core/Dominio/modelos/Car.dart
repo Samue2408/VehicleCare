@@ -9,7 +9,7 @@ class Cars {
   final int year;
   final int mileage;
   final String file_image;
-  final List<Maintenances> maintenance;
+  List<Maintenances> maintenance;
 
   Cars({
     required this.id,
@@ -18,7 +18,7 @@ class Cars {
     required this.year,
     required this.mileage,
     required this.file_image,
-    required this.maintenance,
+    this.maintenance = const [],
   });
 
   factory Cars.fromJson(Map<String, dynamic> json) {

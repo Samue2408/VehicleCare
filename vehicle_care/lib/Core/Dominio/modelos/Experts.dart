@@ -9,7 +9,7 @@ class U_expert{
   String? work_Addres;
   String? speciliaty;
   int? year_of_experience;
-  final List<Reviews> reviews;
+  List<Reviews> reviews;
 
   U_expert({
     required this.id,
@@ -18,7 +18,7 @@ class U_expert{
     required this.work_Addres,
     required this.year_of_experience,
     required this.speciliaty,
-    required this.reviews,
+    this.reviews = const [],
   });
 
   factory U_expert.fromJson(Map<String, dynamic> json) {
