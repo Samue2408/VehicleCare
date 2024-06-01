@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -145,6 +147,7 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
                         maintenance: []);
                     new_user.cars.add(new_car);
                     prefs.addUser(new_user);
+                    prefs.actualUser = jsonEncode([new_user.name, new_user.email]);
                     Navigator.pushReplacementNamed(
                         context, MainScreen.routeName,
                         arguments: new_user.id);

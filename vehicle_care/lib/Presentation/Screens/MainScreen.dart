@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:vehicle_care/Core/Dominio/PreferenciaUsuario/UserPreferences.dart';
-import 'package:vehicle_care/Core/Dominio/modelos/Car.dart';
-import 'dart:io';
 import 'package:vehicle_care/Presentation/Screens/RegisterCarScreen.dart';
 import 'package:vehicle_care/Presentation/Widgets/appbar_general.dart';
 import 'package:vehicle_care/Presentation/Widgets/menuDrawer.dart';

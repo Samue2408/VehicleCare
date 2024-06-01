@@ -31,6 +31,9 @@ class PreferenciaUsuario {
   String get ultimapagina => _prefs.getString('ultimapagina') ?? 'Home';
   set ultimapagina(String value) => _prefs.setString('ultimapagina', value);
 
+  String get actualUser => _prefs.getString('actualUser') ?? '';
+  set actualUser(String value) => _prefs.setString('actualUser', value);
+
   dynamic listUser() {
     String? usersJsonString = user;
     List<dynamic> usersJson = jsonDecode(usersJsonString);

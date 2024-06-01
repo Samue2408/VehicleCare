@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vehicle_care/Presentation/Screens/MainScreen.dart';
@@ -88,6 +90,8 @@ class _Sign_In_State extends State<Sign_In_> {
                     for (var i = 0; i < users.length; i++) {
                       if (userController.text == users[i]['email'] &&
                           passwordController.text == users[i]['password']) {
+                        prefs.actualUser =
+                            jsonEncode([users[i]['name'], users[i]['email']]);
                         Navigator.pushReplacementNamed(
                             context, MainScreen.routeName,
                             arguments: users[i]['id']);

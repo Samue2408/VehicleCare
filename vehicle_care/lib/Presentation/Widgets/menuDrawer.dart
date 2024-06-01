@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vehicle_care/Core/Dominio/PreferenciaUsuario/UserPreferences.dart';
 import 'package:vehicle_care/Presentation/Screens/Sign_in_Screen.dart';
 import 'package:vehicle_care/theme/theme_provider.dart';
 
@@ -53,8 +56,12 @@ class MenuDrawer extends StatefulWidget {
 bool colorsecundario = false;
 
 class _MenuDrawerState extends State<MenuDrawer> {
+  final prefs = PreferenciaUsuario();
+
   @override
   Widget build(BuildContext context) {
+    final nombre = jsonDecode(prefs.actualUser)[0];
+    final email = jsonDecode(prefs.actualUser)[1];
     return Drawer(
       width: widget.screenWidth * 0.6,
       backgroundColor: Theme.of(context).colorScheme.onBackground,
@@ -78,14 +85,14 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Joaquín",
+                      nombre,
                       style: TextStyle(
                           fontFamily: 'Bruno Ace',
                           fontSize: widget.screenWidth * 0.042,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
                     Text(
-                      "joaquincantilloc@gmail.com",
+                      email,
                       style: TextStyle(
                           color: Color(0xffB8B8B8),
                           fontSize: widget.screenWidth * 0.023,
