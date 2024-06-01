@@ -112,38 +112,36 @@ class _MyHomePageState extends State<MyHomePage> {
                               children: [
                                 getStarted(),
                                 myWidth == 0.0
-                                    ? const Expanded(
-                                        child: Center(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                color: Color.fromRGBO(
-                                                    27, 9, 80, 0.25),
-                                              ),
-                                              Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                color: Color.fromRGBO(
-                                                    27, 9, 80, 0.5),
-                                              ),
-                                              Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                color: Color.fromRGBO(
-                                                    27, 9, 80, 0.8),
-                                              ),
-                                              Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                color: Color.fromRGBO(
-                                                    27, 9, 80, 1),
-                                              ),
-                                            ],
+                                    ? Flexible(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.arrow_forward_ios_rounded,
+                                            color: Color.fromRGBO(
+                                                27, 9, 80, 0.25),
                                           ),
-                                        ),
-                                      )
+                                          Icon(
+                                            Icons.arrow_forward_ios_rounded,
+                                            color: Color.fromRGBO(
+                                                27, 9, 80, 0.5),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_forward_ios_rounded,
+                                            color: Color.fromRGBO(
+                                                27, 9, 80, 0.8),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_forward_ios_rounded,
+                                            color: Color.fromRGBO(
+                                                27, 9, 80, 1),
+                                          ),
+                                        ],
+                                      ),
+                                    )
                                     : const SizedBox(),
                               ],
                             )),

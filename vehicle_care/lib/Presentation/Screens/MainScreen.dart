@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:vehicle_care/Core/Dominio/PreferenciaUsuario/UserPreferences.dart';
+import 'package:vehicle_care/Core/Dominio/modelos/Car.dart';
 import 'dart:io';
 import 'package:vehicle_care/Presentation/Screens/RegisterCarScreen.dart';
 import 'package:vehicle_care/Presentation/Widgets/appbar_general.dart';
@@ -33,6 +36,7 @@ class _MainScreenState extends State<MainScreen> {
     final int id = args as int;
 
     final Map<String, dynamic> user = prefs.listUser()[id - 1];
+
     return SafeArea(
       child: Scaffold(
         appBar: appbar_general(screenHeight, context),
@@ -93,37 +97,50 @@ class _MainScreenState extends State<MainScreen> {
                     SizedBox(
                       height: screenHeight * 0.0257,
                     ),
-                    Stack(
-                      children: [
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(12.5),
-                            child: Container(
-                              padding: const EdgeInsets.all(13),
-                              height: screenHeight * 0.24,
-                              width: screenWidth * 0.8,
-                              color: colorTema.primary,
-                              child: const Text(
-                                "Dodge Challenger R/T - 2022",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400),
+                    Container(
+                      height: screenHeight*0.24*user['cars'].length,
+                      width: screenWidth * 0.8,
+                      child: ListView.builder(
+                        itemCount: user['cars'].length,
+                        itemBuilder: (context, index) {
+                          Map<String, dynamic> car = user['cars'][index];
+                          return Stack(
+                            children: [
+                              Container(                                  
+                                padding: const EdgeInsets.all(13),
+                                height: screenHeight * 0.24,
+                                width: screenWidth * 0.8,
+                                decoration: BoxDecoration(
+                                  color: colorTema.primary,
+                                  borderRadius: BorderRadius.circular(12.5)
+                                ),
+                                child: Text(
+                                  "${car['brand']} ${car['model']} - ${car['year']}", // Ajusta esto según tus datos
+                                  style: const TextStyle(
+                                      color: Colors.white, fontWeight: FontWeight.w400),
+                                ),
                               ),
-                            )),
-                        Positioned(
-                          top: 47,
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12.5),
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage('images/carro.png'))),
-                              )),
-                        ),
-                      ],
-                    ),
+                              Positioned(
+                                top: 47,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.5),
+                                      image: DecorationImage(
+                                        image: AssetImage('images/carro.png'),  //FileImage(File(car['file_image'])),
+                                        fit: BoxFit.cover
+                                      ),
+                                    ),
+                                  ),
+                                
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    )
                   ],
                 ),
                 SizedBox(

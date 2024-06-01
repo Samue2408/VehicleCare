@@ -25,6 +25,7 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
   final TextEditingController yearController = TextEditingController();
   final TextEditingController mileageController = TextEditingController();
   File? imagePath;
+  late String path_carro;
   @override
   Widget build(BuildContext context) {
     final dynamic args = ModalRoute.of(context)!.settings.arguments;
@@ -140,7 +141,7 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
                         model: modelController.text,
                         year: int.parse(yearController.text),
                         mileage: int.parse(mileageController.text),
-                        file_image: "file_image",
+                        file_image: path_carro,
                         maintenance: []);
                     new_user.cars.add(new_car);
                     prefs.addUser(new_user);
@@ -175,6 +176,7 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
     if (returnedImage == null) return;
 
     setState(() {
+      path_carro = returnedImage.path;
       imagePath = File(returnedImage.path);
     });
   }

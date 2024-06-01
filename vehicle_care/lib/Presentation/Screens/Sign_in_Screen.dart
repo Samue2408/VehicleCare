@@ -17,14 +17,13 @@ class Sign_In_ extends StatefulWidget {
 }
 
 class _Sign_In_State extends State<Sign_In_> {
-
   bool _isObscurredtext = true; //variable para la funcion de ocultar contraseña
 
   final prefs = PreferenciaUsuario();
 
   final TextEditingController userController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-      bool isEmpty = false;
+  bool isEmpty = false;
 
   bool email_exist = false;
 
@@ -66,8 +65,10 @@ class _Sign_In_State extends State<Sign_In_> {
               ),
               Column(
                 children: <Widget>[
-                  camposTexto("User", Icons.account_circle_rounded, TextInputType.none, userController),
-                  camposTexto("User", Icons.lock, TextInputType.visiblePassword, passwordController),
+                  camposTexto("User", Icons.account_circle_rounded,
+                      TextInputType.none, userController),
+                  camposTexto("User", Icons.lock, TextInputType.visiblePassword,
+                      passwordController),
                 ],
               ),
               //boton del login
@@ -82,20 +83,24 @@ class _Sign_In_State extends State<Sign_In_> {
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 onPressed: () {
-                  if (userController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+                  if (userController.text.isNotEmpty &&
+                      passwordController.text.isNotEmpty) {
                     for (var i = 0; i < users.length; i++) {
-                      if (userController.text == users[i]['email'] && 
-                            passwordController.text == users[i]['password'] ) {
-                              Navigator.pushReplacementNamed(context, MainScreen.routeName);
-                      }else{
-                        showMyDialog(context, 'Wrong credentials', 'Please carefully review the credentials you have entered');
+                      if (userController.text == users[i]['email'] &&
+                          passwordController.text == users[i]['password']) {
+                        Navigator.pushReplacementNamed(
+                            context, MainScreen.routeName,
+                            arguments: users[i]['id']);
+                      } else {
+                        showMyDialog(context, 'Wrong credentials',
+                            'Please carefully review the credentials you have entered');
                       }
                     }
-                  } else{
+                  } else {
                     setState(() {
                       isEmpty = true;
                     });
-                  }      
+                  }
                 },
               ),
               Column(
