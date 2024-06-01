@@ -169,7 +169,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               name: nameController.text,
                               password: passwordController.text,
                               cars: []);
-                          users = prefs.addUser(new_user);
                           Navigator.pushReplacementNamed(
                               context, QuestionsPage.routeName, arguments: new_user);
                         } else {

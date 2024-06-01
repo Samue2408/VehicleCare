@@ -32,7 +32,7 @@ class _Sign_In_State extends State<Sign_In_> {
     //variables
     double screenHeight = MediaQuery.of(context).size.height;
     List<dynamic> users = prefs.listUser();
-
+    print(users);
     //
     return SafeArea(
       child: Scaffold(
@@ -91,11 +91,12 @@ class _Sign_In_State extends State<Sign_In_> {
                         Navigator.pushReplacementNamed(
                             context, MainScreen.routeName,
                             arguments: users[i]['id']);
-                      } else {
-                        showMyDialog(context, 'Wrong credentials',
-                            'Please carefully review the credentials you have entered');
+                        return;
                       }
                     }
+
+                    showMyDialog(context, 'Wrong credentials',
+                        'Please carefully review the credentials you have entered');
                   } else {
                     setState(() {
                       isEmpty = true;

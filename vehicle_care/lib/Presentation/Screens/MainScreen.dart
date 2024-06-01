@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
     final int id = args as int;
 
     final Map<String, dynamic> user = prefs.listUser()[id - 1];
-
+    print(user);
     return SafeArea(
       child: Scaffold(
         appBar: appbar_general(screenHeight, context),
@@ -98,7 +98,7 @@ class _MainScreenState extends State<MainScreen> {
                       height: screenHeight * 0.0257,
                     ),
                     Container(
-                      height: screenHeight*0.24*user['cars'].length,
+                      height: screenHeight * 0.24,
                       width: screenWidth * 0.8,
                       child: ListView.builder(
                         itemCount: user['cars'].length,
@@ -106,18 +106,18 @@ class _MainScreenState extends State<MainScreen> {
                           Map<String, dynamic> car = user['cars'][index];
                           return Stack(
                             children: [
-                              Container(                                  
+                              Container(
                                 padding: const EdgeInsets.all(13),
                                 height: screenHeight * 0.24,
                                 width: screenWidth * 0.8,
                                 decoration: BoxDecoration(
-                                  color: colorTema.primary,
-                                  borderRadius: BorderRadius.circular(12.5)
-                                ),
+                                    color: colorTema.primary,
+                                    borderRadius: BorderRadius.circular(12.5)),
                                 child: Text(
                                   "${car['brand']} ${car['model']} - ${car['year']}", // Ajusta esto según tus datos
                                   style: const TextStyle(
-                                      color: Colors.white, fontWeight: FontWeight.w400),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400),
                                 ),
                               ),
                               Positioned(
@@ -126,15 +126,15 @@ class _MainScreenState extends State<MainScreen> {
                                 right: 0,
                                 bottom: 0,
                                 child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12.5),
-                                      image: DecorationImage(
-                                        image: AssetImage('images/carro.png'),  //FileImage(File(car['file_image'])),
-                                        fit: BoxFit.cover
-                                      ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12.5),
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                          'images/carro.png'), //FileImage(File(car['file_image'])),
+                                      fit: BoxFit.cover
                                     ),
                                   ),
-                                
+                                ),
                               ),
                             ],
                           );
