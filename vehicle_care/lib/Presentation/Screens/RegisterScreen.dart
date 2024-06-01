@@ -174,11 +174,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               context, QuestionsPage.routeName, arguments: new_user);
                         } else {
                           //usuario existente
-                          showMyDialog(context);
+                          showMyDialog(context, 'Existing user', 'Please log in with other credentials');
                           setState(() {
                             email_exist = false;
                           });
-                          
                         }
                       } else {
                         setState(() {
