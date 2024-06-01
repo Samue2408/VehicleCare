@@ -3,6 +3,9 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:vehicle_care/Core/Dominio/PreferenciaUsuario/UserPreferences.dart';
+import 'package:vehicle_care/Core/Dominio/modelos/Car.dart';
+import 'package:vehicle_care/Core/Dominio/modelos/User.dart';
 import 'package:vehicle_care/Presentation/Screens/MainScreen.dart';
 import 'package:vehicle_care/Presentation/Widgets/camposTexto.dart';
 
@@ -16,13 +19,16 @@ class RegisterCarScreen extends StatefulWidget {
 }
 
 class _RegisterCarScreenState extends State<RegisterCarScreen> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController userController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final prefs = PreferenciaUsuario();
+  final TextEditingController brandController = TextEditingController();
+  final TextEditingController modelController = TextEditingController();
+  final TextEditingController yearController = TextEditingController();
+  final TextEditingController mileageController = TextEditingController();
   File? imagePath;
   @override
   Widget build(BuildContext context) {
+    final dynamic args = ModalRoute.of(context)!.settings.arguments;
+    final Users new_user = args as Users;
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -66,13 +72,14 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
               ),
               Column(
                 children: [
-                  camposTexto(
-                      'Brand', Icons.directions_car, TextInputType.name, nameController),
-                  camposTexto(
-                      'Model', Icons.type_specimen, TextInputType.emailAddress, userController),
+                  camposTexto('Brand', Icons.directions_car, TextInputType.name,
+                      brandController),
+                  camposTexto('Model', Icons.type_specimen,
+                      TextInputType.emailAddress, modelController),
                   camposTexto('Year', Icons.calendar_month_rounded,
-                      TextInputType.phone, phoneController),
-                  camposTexto('Mileage', Icons.speed, TextInputType.number, passwordController),
+                      TextInputType.phone, yearController),
+                  camposTexto('Mileage', Icons.speed, TextInputType.number,
+                      mileageController),
                   SizedBox(
                     height: screenHeight * 0.02,
                   ),
@@ -118,8 +125,29 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, MainScreen.routeName,
-                      arguments: imagePath);
+                  if (brandController.text.isNotEmpty &&
+                      modelController.text.isNotEmpty &&
+                      yearController.text.isNotEmpty &&
+                      mileageController.text.isNotEmpty) {
+                    int id = 1;
+                    if (new_user.cars.isNotEmpty) {
+                      id = new_user.cars.reversed.first.id + 1;
+                    }
+
+                    Cars new_car = Cars(
+                        id: id,
+                        brand: brandController.text,
+                        model: modelController.text,
+                        year: int.parse(yearController.text),
+                        mileage: int.parse(mileageController.text),
+                        file_image: "file_image",
+                        maintenance: []);
+                    new_user.cars.add(new_car);
+                    prefs.addUser(new_user);
+                    Navigator.pushReplacementNamed(
+                        context, MainScreen.routeName,
+                        arguments: new_user.id);
+                  }
                 },
                 style: TextButton.styleFrom(
                     backgroundColor: const Color(0xFF1B0950),

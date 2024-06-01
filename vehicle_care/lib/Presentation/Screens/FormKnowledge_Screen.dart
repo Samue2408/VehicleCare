@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vehicle_care/Core/Dominio/modelos/Questions.dart';
+import 'package:vehicle_care/Core/Dominio/modelos/User.dart';
 import 'package:vehicle_care/Presentation/Screens/RegisterCarScreen.dart';
 
 class QuestionsPage extends StatefulWidget {
@@ -74,6 +75,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final dynamic args = ModalRoute.of(context)!.settings.arguments;
+    final Users new_user = args as Users;
     List<Widget> generateRadioButtons(Question pregunta, int index) {
       double screenHeight = MediaQuery.of(context).size.height;
       return List.generate(
@@ -91,12 +94,14 @@ class _QuestionsPageState extends State<QuestionsPage> {
                         selectedOptionIndexes[index] = value!;
                       });
                     },
-                    fillColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-                    if (states.contains(MaterialState.selected)) {
-                      return Colors.purple;
-                    }
-                    return Colors.grey; // Color del borde cuando no está seleccionado
-                  }),
+                    fillColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.selected)) {
+                        return Colors.purple;
+                      }
+                      return Colors
+                          .grey; // Color del borde cuando no está seleccionado
+                    }),
                     activeColor: Colors.purple,
                   ),
                   Expanded(
@@ -197,7 +202,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                 ),
                 onPressed: () {
                   Navigator.pushReplacementNamed(
-                      context, RegisterCarScreen.routeName);
+                      context, RegisterCarScreen.routeName, arguments: new_user);
                 },
               ),
               const SizedBox(height: 50)

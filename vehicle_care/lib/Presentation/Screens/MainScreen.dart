@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vehicle_care/Core/Dominio/PreferenciaUsuario/UserPreferences.dart';
 import 'dart:io';
 import 'package:vehicle_care/Presentation/Screens/RegisterCarScreen.dart';
 import 'package:vehicle_care/Presentation/Widgets/appbar_general.dart';
@@ -22,13 +23,16 @@ bool buttonSelected = false;
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
+    final prefs = PreferenciaUsuario();
+
     ColorScheme colorTema = Theme.of(context).colorScheme;
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
     final dynamic args = ModalRoute.of(context)!.settings.arguments;
-    final File carro = args as File;
+    final int id = args as int;
 
+    final Map<String, dynamic> user = prefs.listUser()[id - 1];
     return SafeArea(
       child: Scaffold(
         appBar: appbar_general(screenHeight, context),
